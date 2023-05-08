@@ -6,3 +6,20 @@ services:
       - "8080:8080"
     volumes:
       - ./src:/app/src
+    depends_on:
+      - mongo
+    env_file: .development.env
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: R0!I574
+    ports:
+      - 27017:27017
+    volumes:
+      - db-data:/data/db
+
+volumes:
+  db-data:
